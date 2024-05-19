@@ -1,5 +1,5 @@
 var ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // x1fmddbc1htczx8
-var FOLDER_PATH = ''; /ELsonotec
+var FOLDER_PATH = ''; //ELsonotec
 
 var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
 
