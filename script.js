@@ -1,4 +1,4 @@
-var ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // sl.B1i_7RgEqJI3jxkagahtyepCBJj81vmrdv6ucKF05zUVDdd2RVRM3PchzRxh2a5n0eYQHDJsNj3k9BtpHu_nD29eh7fsCmjWPxNhgRXjGduX9Agg8iLIHSwEwVe2TQLkJ-UWp6MZFIIs
+var ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // sl.B1j_zt6_d2tLQvZq8d2AiNbIzkCRrGXi9lLtwD3nmj_BlfGmdHzFBzseig5aaCrsMW_XMzzjyq9is_XrdmQE_AwAxS-3_En8F75V6LWhhOhWMxaNXuWRRXg7At-A-2-Vs1kQvslR108P
 var FOLDER_PATH = ''; //Elsonotec
 
 var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
