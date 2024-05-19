@@ -2,6 +2,7 @@ var CLIENT_ID = 'YOUR_CLIENT_ID';  // 998542083565-p1mjfb678kuia278ciatbalo32cpl
 var API_KEY = 'YOUR_API_KEY';      // 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
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+var FOLDER_ID = 'YOUR_FOLDER_ID';  // 1d-0k0YD77ymYKtUVr7NfNRwClAJof848
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
@@ -47,7 +48,7 @@ function handleSignoutClick(event) {
 function searchFiles() {
     var query = document.getElementById('search-input').value;
     gapi.client.drive.files.list({
-        'q': `name contains '${query}' and mimeType='audio/mpeg'`,
+        'q': `name contains '${query}' and '${FOLDER_ID}' in parents and mimeType='audio/mpeg'`,
         'fields': "nextPageToken, files(id, name, webContentLink)"
     }).then(function(response) {
         var files = response.result.files;
@@ -71,4 +72,5 @@ function playAudio(link) {
     audioPlayer.play();
 }
 
+// Charger l'API et initialiser le client
 handleClientLoad();
