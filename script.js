@@ -1,5 +1,5 @@
 var ACCESS_TOKEN = 'YOUR_ACCESS_TOKEN'; // sl.B1j_zt6_d2tLQvZq8d2AiNbIzkCRrGXi9lLtwD3nmj_BlfGmdHzFBzseig5aaCrsMW_XMzzjyq9is_XrdmQE_AwAxS-3_En8F75V6LWhhOhWMxaNXuWRRXg7At-A-2-Vs1kQvslR108P
-var FOLDER_PATH = ''; //Elsonotec
+var FOLDER_PATH = ''; //ELsonotec
 
 var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
 
