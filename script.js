@@ -3,16 +3,14 @@ var FOLDER_PATH = ''; //Elsonotec
 
 var dbx = new Dropbox.Dropbox({ accessToken: ACCESS_TOKEN });
 
-function searchFiles() {
-    var query = document.getElementById('search-input').value.toLowerCase();
+function listFiles() {
     dbx.filesListFolder({ path: FOLDER_PATH })
         .then(function(response) {
-            var files = response.entries.filter(file => 
-                file.name.toLowerCase().includes(query) && file[".tag"] === 'file');
-            displayResults(files);
+            console.log('Files:', response.entries);
+            displayResults(response.entries);
         })
         .catch(function(error) {
-            console.error('Error searching files:', error);
+            console.error('Error listing files:', error);
         });
 }
 
@@ -22,7 +20,7 @@ function displayResults(files) {
     if (files.length > 0) {
         files.forEach(function(file) {
             var fileDiv = document.createElement('div');
-            fileDiv.innerHTML = `<p>${file.name} <button onclick="playAudio('${file.path_lower}')">Jouer</button></p>`;
+            fileDiv.textContent = file.name;
             resultsDiv.appendChild(fileDiv);
         });
     } else {
@@ -30,14 +28,5 @@ function displayResults(files) {
     }
 }
 
-function playAudio(path) {
-    dbx.filesGetTemporaryLink({ path: path })
-        .then(function(response) {
-            var audioPlayer = document.getElementById('audio-player');
-            audioPlayer.src = response.link;
-            audioPlayer.play();
-        })
-        .catch(function(error) {
-            console.error('Error getting temporary link:', error);
-        });
-}
+// Lister les fichiers au chargement de la page
+listFiles();
