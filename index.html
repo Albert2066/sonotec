@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonothèque</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .search-bar { margin-bottom: 20px; }
+        .audio-player { margin-top: 20px; }
+        .admin { margin-top: 40px; display: none; }
+    </style>
+</head>
+<body>
+    <h1>Sonothèque</h1>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Rechercher un son...">
+        <button onclick="searchFiles()">Rechercher</button>
+    </div>
+    <div id="results"></div>
+    <div class="audio-player">
+        <audio id="audio-player" controls></audio>
+    </div>
+    <div class="admin">
+        <h2>Mode Administrateur</h2>
+        <textarea id="metadata-input" placeholder="Ajouter des métadonnées..."></textarea>
+        <button onclick="saveMetadata()">Enregistrer</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
