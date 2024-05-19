@@ -1,18 +1,61 @@
-// script.js
+var CLIENT_ID = 'YOUR_CLIENT_ID';  // 998542083565-p1mjfb678kuia278ciatbalo32cplfjj.apps.googleusercontent.com
+var API_KEY = 'YOUR_API_KEY';      // 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
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+
+var authorizeButton = document.getElementById('authorize_button');
+var signoutButton = document.getElementById('signout_button');
+
+function handleClientLoad() {
+    gapi.load('client:auth2', initClient);
+}
+
+function initClient() {
+    gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        discoveryDocs: DISCOVERY_DOCS,
+        scope: SCOPES
+    }).then(function () {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        authorizeButton.onclick = handleAuthClick;
+        signoutButton.onclick = handleSignoutClick;
+    }, function(error) {
+        console.log(JSON.stringify(error, null, 2));
+    });
+}
+
+function updateSigninStatus(isSignedIn) {
+    if (isSignedIn) {
+        authorizeButton.style.display = 'none';
+        signoutButton.style.display = 'block';
+    } else {
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+    }
+}
+
+function handleAuthClick(event) {
+    gapi.auth2.getAuthInstance().signIn();
+}
+
+function handleSignoutClick(event) {
+    gapi.auth2.getAuthInstance().signOut();
+}
 
 function searchFiles() {
-    const query = document.getElementById('search-input').value;
-    // Appel à l'API Google Drive pour rechercher des fichiers
+    var query = document.getElementById('search-input').value;
     gapi.client.drive.files.list({
         'q': `name contains '${query}' and mimeType='audio/mpeg'`,
         'fields': "nextPageToken, files(id, name, webContentLink)"
     }).then(function(response) {
-        const files = response.result.files;
-        const resultsDiv = document.getElementById('results');
+        var files = response.result.files;
+        var resultsDiv = document.getElementById('results');
         resultsDiv.innerHTML = '';
         if (files && files.length > 0) {
-            files.forEach(file => {
-                const fileDiv = document.createElement('div');
+            files.forEach(function(file) {
+                var fileDiv = document.createElement('div');
                 fileDiv.innerHTML = `<p>${file.name} <button onclick="playAudio('${file.webContentLink}')">Jouer</button></p>`;
                 resultsDiv.appendChild(fileDiv);
             });
@@ -23,27 +66,9 @@ function searchFiles() {
 }
 
 function playAudio(link) {
-    const audioPlayer = document.getElementById('audio-player');
+    var audioPlayer = document.getElementById('audio-player');
     audioPlayer.src = link;
     audioPlayer.play();
 }
 
-function saveMetadata() {
-    const metadata = document.getElementById('metadata-input').value;
-    // Logique pour sauvegarder les métadonnées via Google Apps Script
-    google.script.run.saveMetadata(metadata);
-}
-
-// Initialisation de l'API Google Drive
-function initClient() {
-    gapi.client.init({
-        'apiKey': 'YOUR_API_KEY',
-        'discoveryDocs': ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-        'clientId': 'YOUR_CLIENT_ID',
-        'scope': 'https://www.googleapis.com/auth/drive.readonly'
-    }).then(function () {
-        // Autorisation et autres initialisations
-    });
-}
-
-gapi.load('client:auth2', initClient);
+handleClientLoad();
