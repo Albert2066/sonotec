@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonothèque</title>
+    <title>Sonothèque Dropbox</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Sonothèque</h1>
-    <button id="authorize_button">Authorize</button>
-    <button id="signout_button">Sign Out</button>
+    <h1>Sonothèque Dropbox</h1>
     <div class="search-bar">
         <input type="text" id="search-input" placeholder="Rechercher un son...">
         <button onclick="searchFiles()">Rechercher</button>
@@ -18,7 +16,7 @@
     <div class="audio-player">
         <audio id="audio-player" controls></audio>
     </div>
-    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
